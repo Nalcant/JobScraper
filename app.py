@@ -8,7 +8,11 @@ from scraper import Scraper
 this class handles user interface
 '''
 class App:
-    selectedURLs = [""]
+    '''
+    this list will be empty and filled with the entrys of the user,
+    but now, for test purposes, it will have a value
+    '''
+    selectedURLs = ["https://br.indeed.com/"]
     
     def __init__(self):
         #window setup
@@ -33,7 +37,7 @@ class App:
         self.localEntry.grid(row=3, column=0, ipadx=80, padx= 10)
         #start button
         self.searchButtom = tkinter.Button(self.root, text = "Search", 
-                                           command=self.callSearch(self.selectedURLs,
+                                           command= lambda: self.callSearch(self.selectedURLs,
                                                                   1,2))
         self.searchButtom.grid(row=3, column=1, ipadx=20, padx= 10  )
         """  
@@ -47,10 +51,12 @@ class App:
         self.root.mainloop()
     
     def callSearch(self, srcURLs = list[str], min = int, max = int) -> str: 
+        print("call search was called")
         if len(srcURLs) == 0:
             raise ValueError("srcURLs argument cannot be empty")
         else:
             self.scraperObj = Scraper(self.selectedURLs, min, max)
+            print("Scraper was instantiated")
         pass
 
 
